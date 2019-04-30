@@ -13,64 +13,84 @@ namespace Game15
     public partial class FormGame15 : Form
     {
         Game game;
-        int lev=20;
+        int lev = 20; int position;
+        static int size = 4;
+        Button[,] button = new Button[size, size];
+        ImageList im = new ImageList();
+
         public FormGame15()
         {
             InitializeComponent();
             game = new Game(4);
+            generatoin_buttom();
             game.start();
             start_game();
         }
 
-        private void button15_Click(object sender, EventArgs e)
+        private void generatoin_buttom()
         {
-            int position = Convert.ToInt16(((Button)sender).Tag);
-              game.shift(position);
-             refresh();
+            int a = 0;
+      
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    button[i, j] = new Button();
+                    button[i, j].Size = new Size(65, 65);
+                    button[i, j].Location = new Point(j*65, 23+i*65);
+                    button[i, j].Tag = a;
+                    button[i, j].Name = "button" + a;
+                    button[i, j].Click += ButtonOnClick;
+                    button[i, j].Text = a.ToString();
+                    this.Controls.Add(button[i, j]);
+                    a++;
+                }
+                                
+            }
+        }
+
+        private void ButtonOnClick(object sender, EventArgs e)
+        {
+            position = Convert.ToInt16(((Button)sender).Tag);
+            game.shift(position);
+            refresh();
             if (game.check())
             {
                 pictureBox1.Visible = true;
                 MessageBox.Show("Вы победили!");
-               // menu_Click(sender, e);
+                // menu_Click(sender, e);
             }
         }
+        
         private void refresh()
         {
-            for (int position = 0; position < 16; position++)
+            for (int position = 0; position < size*size; position++)
             {
-                int n=game.get_num(position);
-              //  button(position).Text = n.ToString();
+                int n = game.get_num(position);
+                  but(position).Text = n.ToString();
                 if (n > 0)
                 {
-                    button(position).Visible = true;
+                    but(position).Visible = true;
                     picture(position, n);
 
                 }
-                else button(position).Visible = false;
+                else but(position).Visible = false;
             }
         }
-        private Button button(int position)
+
+        private Button but(int position)
         {
-            switch (position)
+            for (int i = 0; i < size; i++)
             {
-                case 0: return button0;
-                case 1: return button1;
-                case 2: return button2;
-                case 3: return button3;
-                case 4: return button4;
-                case 5: return button5;
-                case 6: return button6;
-                case 7: return button7;
-                case 8: return button8;
-                case 9: return button9;
-                case 10: return button10;
-                case 11: return button11;
-                case 12: return button12;
-                case 13: return button13;
-                case 14: return button14;
-                case 15: return button15;
-                default: return null;
+                for (int j = 0; j < size; j++)
+                {
+                    if ((int)button[i, j].Tag == position)
+                    {
+                        return button[i, j];
+                    }
+                }
             }
+            return null;
         }
 
         private void menu_Click(object sender, EventArgs e)
@@ -86,29 +106,22 @@ namespace Game15
             {
                 game.mixing();
             }
-            refresh();
+           refresh();
         }
 
         private void picture(int position, int n)
         {
-            switch (n)
+            for (int i = 0; i < size; i++)
             {
-                case 1: button(position).BackgroundImage = Game15.Properties.Resources._01_01; break;
-                case 2: button(position).BackgroundImage = Game15.Properties.Resources._02_01; break;
-                case 3: button(position).BackgroundImage = Game15.Properties.Resources._03_01; break;
-                case 4: button(position).BackgroundImage = Game15.Properties.Resources._04_01; break;
-                case 5: button(position).BackgroundImage = Game15.Properties.Resources._05_01; break;
-                case 6: button(position).BackgroundImage = Game15.Properties.Resources._06_01; break;
-                case 7: button(position).BackgroundImage = Game15.Properties.Resources._07_01; break;
-                case 8: button(position).BackgroundImage = Game15.Properties.Resources._08_01; break;
-                case 9: button(position).BackgroundImage = Game15.Properties.Resources._09_01; break;
-                case 10: button(position).BackgroundImage = Game15.Properties.Resources._10_01; break;
-                case 11: button(position).BackgroundImage = Game15.Properties.Resources._11_01; break;
-                case 12: button(position).BackgroundImage = Game15.Properties.Resources._12_01; break;
-                case 13: button(position).BackgroundImage = Game15.Properties.Resources._13_01; break;
-                case 14: button(position).BackgroundImage = Game15.Properties.Resources._14_01; break;
-                case 15: button(position).BackgroundImage = Game15.Properties.Resources._15_01; break;
+                for (int j = 0; j < size; j++)
+                {
+                    if ((int)button[i, j].Tag == position)
+                    {
+                        button[i, j].BackgroundImage = imageList1.Images[n-1];
+                    }
+                }
             }
+           
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
@@ -134,5 +147,6 @@ namespace Game15
             FormHelp newForm = new FormHelp();
             newForm.Show();
         }
+
     }
 }

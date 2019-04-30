@@ -9,8 +9,9 @@ namespace Game15
     class Game
     {
         int size, space_x, space_y;
-        int[,] m;
-        static Random rand =new Random();
+        public int [,] m;
+        static Random rand = new Random();
+
         public Game (int size)
         {
             if (size < 2) size = 2;
@@ -18,6 +19,7 @@ namespace Game15
             this.size = size;
             m = new int[size, size];
         }
+
         public void start()
         {
             for (int x = 0; x < size; x++)
@@ -31,6 +33,7 @@ namespace Game15
             space_y = size - 1;
             m[space_x, space_y] = 0;
         }
+
         public void shift(int position)
         {
             int x, y;
@@ -43,6 +46,7 @@ namespace Game15
                 space_y = y;
             }
         }
+
         public int get_num(int position)
         {
             int x, y;
@@ -67,6 +71,7 @@ namespace Game15
             x = position % size;
             y = position / size;
         }
+
         public void mixing()
         {
             int a = rand.Next(0, 4);
@@ -95,8 +100,8 @@ namespace Game15
                         if (m[x, y] != coordinates_to_position(x, y) + 1) return false;
                     }
                 }
-            
                 return true;
         }
+
     }
 }
