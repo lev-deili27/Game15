@@ -15,7 +15,7 @@ namespace Game15
         public Game (int size)
         {
             if (size < 2) size = 2;
-            if (size > 5) size = 5;
+            if (size > 8) size = 8;
             this.size = size;
             m = new int[size, size];
         }
