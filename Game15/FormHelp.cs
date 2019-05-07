@@ -15,7 +15,6 @@ namespace Game15
         public FormHelp()
         {
             InitializeComponent();
-            pictureBox1.Image = FormGame15.big_img[FormGame15.count_img];
         }
     }
 }
