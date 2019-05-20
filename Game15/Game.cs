@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Windows.Forms;
+
 namespace Game15
 {
     class Game
     {
         int size, space_x, space_y;
-        public int [,] m;
+        public int[,] m;
         static Random rand = new Random();
 
         public Game (int size)
@@ -74,16 +76,61 @@ namespace Game15
 
         public void mixing()
         {
-            int a = rand.Next(0, 4);
-            int x = space_x, y = space_y;
-            switch (a)
+            for (int i = 0; i < size -1; i++)
             {
-                case 0: x--; break;
-                case 1: x++; break;
-                case 2: y--; break;
-                case 3: y++; break;
+                for (int j = 0; j < size -1; j++)
+                {
+                    
+                    int a = rand.Next(j + 1);
+                    int b = rand.Next(i + 1);
+                    var temp = m[b,a];
+                    m[b,a] = m[i,j];
+                    m[i,j] = temp;
+                    if (m[i, j] == 0)
+                    {
+                        space_x = i;
+                        space_y = j;
+                    }
+                }
             }
-            shift(coordinates_to_position(x, y));
+            mix_check();
+
+            //int a = rand.Next(0, 4);
+            //int x = space_x, y = space_y;
+            //switch (a)
+            //{
+            //    case 0: x--; break;
+            //    case 1: x++; break;
+            //    case 2: y--; break;
+            //    case 3: y++; break;
+            //}
+            //shift(coordinates_to_position(x, y));
+        }
+
+        public void mix_check()
+        {
+            int inv = 0;
+            for (int i = 1; i < size; i++)
+            {
+                for (int j = 1; j < size; j++)
+                {
+                    if (m[i - 1, j - 1] > m[i, j])
+                    {
+                        inv++;
+                    }
+                }
+            }
+            int c = inv+1;
+            //MessageBox.Show("c = " + c+ " inv = "+ inv+ " y = " + space_y+" x = " +space_x);
+            if (c % 2 == 0)
+            {
+                return;
+            }
+            else
+            {
+                mixing();
+            }
+
         }
 
         public bool check()
@@ -101,6 +148,11 @@ namespace Game15
                     }
                 }
                 return true;
+        }
+
+        public int space_but()
+        {
+            return coordinates_to_position(space_x, space_y);
         }
 
     }

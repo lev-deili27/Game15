@@ -11,13 +11,12 @@ namespace Game15
     class Control 
     {
         Game game; Picture pic;
-        int lev = 20; int position;
+        int position;
         int size=4;
-        public Button[,] button;//=new Button[4, 4];
+        public Button[,] button;
         public static int count_img = 0, a = 0;
         public static Image[] big_img;
-        Form f;
-//
+
         public Control(int size)
         {
             if (size < 2) size = 2;
@@ -54,7 +53,6 @@ namespace Game15
                     button[i, j].Name = "button" + a;
                     button[i, j].Click += ButtonOnClick;
                     //button[i, j].Text = a.ToString();
-                   // f.Controls.Add(button[i, j]);
                     a++;
                 }
 
@@ -68,13 +66,13 @@ namespace Game15
             refresh();
             if (game.check())
             {
+                but(game.space_but()).Visible = true;
                 //f.pictureBox1.Visible = true;
                 MessageBox.Show("Вы победили!");
-                // menu_Click(sender, e);
             }
         }
 
-        private void refresh()
+        public void refresh()
         {
             for (int position = 0; position < size * size; position++)
             {
@@ -108,11 +106,7 @@ namespace Game15
         public void start_game()
         {
             game.start();
-            //.pictureBox1.Visible = false;
-            for (int i = 0; i < 5; i++)
-            {
-                game.mixing();
-            }
+            game.mixing();
             refresh();
         }
 

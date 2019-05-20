@@ -36,6 +36,7 @@ namespace Game15
                 }
 
             }
+            con.refresh();
         }
 
 
