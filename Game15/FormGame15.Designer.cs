@@ -30,19 +30,20 @@
         {
             this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menu = new System.Windows.Forms.ToolStripMenuItem();
-            this.levelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.buttonLeft = new System.Windows.Forms.Button();
             this.buttonRight = new System.Windows.Forms.Button();
+            this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.levelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.level1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.level2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.level3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.savegame = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadSavedGame = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -50,22 +51,15 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
+            this.menuToolStripMenuItem,
             this.menu,
-            this.levelToolStripMenuItem,
             this.toolStripMenuItem2,
-            this.toolStripMenuItem6,
             this.toolStripMenuItem7});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(264, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(12, 20);
             // 
             // menu
             // 
@@ -74,37 +68,6 @@
             this.menu.Text = "Start";
             this.menu.Click += new System.EventHandler(this.menu_Click);
             // 
-            // levelToolStripMenuItem
-            // 
-            this.levelToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem3,
-            this.toolStripMenuItem4,
-            this.toolStripMenuItem5});
-            this.levelToolStripMenuItem.Name = "levelToolStripMenuItem";
-            this.levelToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
-            this.levelToolStripMenuItem.Text = "Level";
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(110, 22);
-            this.toolStripMenuItem3.Text = "Level 1";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
-            // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(110, 22);
-            this.toolStripMenuItem4.Text = "Level 2";
-            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
-            // 
-            // toolStripMenuItem5
-            // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(110, 22);
-            this.toolStripMenuItem5.Text = "Level 3";
-            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
-            // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -112,11 +75,6 @@
             this.toolStripMenuItem2.Size = new System.Drawing.Size(24, 20);
             this.toolStripMenuItem2.Text = "?";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
-            // 
-            // toolStripMenuItem6
-            // 
-            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(12, 20);
             // 
             // toolStripMenuItem7
             // 
@@ -167,6 +125,61 @@
             this.buttonRight.UseVisualStyleBackColor = true;
             this.buttonRight.Click += new System.EventHandler(this.buttonRight_Click);
             // 
+            // menuToolStripMenuItem
+            // 
+            this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.levelToolStripMenuItem1,
+            this.savegame,
+            this.loadSavedGame});
+            this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.menuToolStripMenuItem.Text = "Menu";
+            // 
+            // levelToolStripMenuItem1
+            // 
+            this.levelToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.level1,
+            this.level2,
+            this.level3});
+            this.levelToolStripMenuItem1.Name = "levelToolStripMenuItem1";
+            this.levelToolStripMenuItem1.Size = new System.Drawing.Size(166, 22);
+            this.levelToolStripMenuItem1.Text = "Level";
+            // 
+            // level1
+            // 
+            this.level1.Name = "level1";
+            this.level1.Size = new System.Drawing.Size(152, 22);
+            this.level1.Text = "Level 1";
+            this.level1.Click += new System.EventHandler(this.level1_Click_1);
+            // 
+            // level2
+            // 
+            this.level2.Name = "level2";
+            this.level2.Size = new System.Drawing.Size(152, 22);
+            this.level2.Text = "Level 2";
+            this.level2.Click += new System.EventHandler(this.level2_Click_1);
+            // 
+            // level3
+            // 
+            this.level3.Name = "level3";
+            this.level3.Size = new System.Drawing.Size(152, 22);
+            this.level3.Text = "Level 3";
+            this.level3.Click += new System.EventHandler(this.level3_Click_1);
+            // 
+            // savegame
+            // 
+            this.savegame.Name = "savegame";
+            this.savegame.Size = new System.Drawing.Size(166, 22);
+            this.savegame.Text = "Save the game";
+            this.savegame.Click += new System.EventHandler(this.savegame_Click);
+            // 
+            // loadSavedGame
+            // 
+            this.loadSavedGame.Name = "loadSavedGame";
+            this.loadSavedGame.Size = new System.Drawing.Size(166, 22);
+            this.loadSavedGame.Text = "Load saved game";
+            this.loadSavedGame.Click += new System.EventHandler(this.loadSavedGame_Click);
+            // 
             // FormGame15
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -191,19 +204,20 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem menu;
-        private System.Windows.Forms.ToolStripMenuItem levelToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         public System.Windows.Forms.PictureBox pictureBox1;
         public System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
         public System.Windows.Forms.Button buttonLeft;
         public System.Windows.Forms.Button buttonRight;
+        private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem levelToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem level1;
+        private System.Windows.Forms.ToolStripMenuItem level2;
+        private System.Windows.Forms.ToolStripMenuItem level3;
+        private System.Windows.Forms.ToolStripMenuItem savegame;
+        private System.Windows.Forms.ToolStripMenuItem loadSavedGame;
     }
 }
 

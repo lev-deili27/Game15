@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using System.IO;
 
 namespace Game15
 {
@@ -12,13 +13,15 @@ namespace Game15
     {
         Game game; Picture pic;
         int position;
-        int size=4;
+        int size;
         public Button[,] button;
-        public static int count_img = 0, a = 0;
+        public static int c;
+        int count_img = 0, a = 0;
         public static Image[] big_img;
-
+        int[] N;
         public Control(int size)
         {
+            this.size = size;
             if (size < 2) size = 2;
             if (size > 8) size = 8;
             game = new Game(size);
@@ -27,7 +30,7 @@ namespace Game15
             generatoin_buttom();
             game.start();
             start_game();
-            this.size = size;
+            
         }
 
         public Image start_pic()
@@ -66,6 +69,7 @@ namespace Game15
             refresh();
             if (game.check())
             {
+                but(game.space_but()).BackgroundImage = pic.img1.Images[(count_img * size * size) + (size * size-1)];
                 but(game.space_but()).Visible = true;
                 //f.pictureBox1.Visible = true;
                 MessageBox.Show("Вы победили!");
@@ -74,21 +78,95 @@ namespace Game15
 
         public void refresh()
         {
-            for (int position = 0; position < size * size; position++)
-            {
-                int n = game.get_num(position);
-                //but(position).Text = n.ToString();
-                if (n > 0)
+            int n;
+                for (int position = 0; position < size * size; position++)
                 {
-                    but(position).Visible = true;
-                    picture(position, n);
 
+                    n = game.get_num(position);
+                   // but(position).Text = n.ToString();
+                    if (n > 0)
+                    {
+                        but(position).Visible = true;
+                        picture(position, n);
+
+                    }
+                    else but(position).Visible = false;
                 }
-                else but(position).Visible = false;
+        }
+
+        public void Save(){
+            using (StreamWriter str = new StreamWriter(@"E:\isd\Game15\SaveGame.txt"))
+            {
+                str.WriteLine(size);
+                for (int position = 0; position < size * size; position++)
+                {
+                    int n = game.get_num(position);
+                    str.WriteLine(n);
+                }
+
+               
+                str.Close();
             }
         }
 
-        private Button but(int position)
+        public void loadSavedGame(){
+            var fi = new FileInfo(@"E:\isd\Game15\SaveGame.txt");
+            if (fi.Length == 0)
+            {
+                MessageBox.Show("Нет сохранненой игры.");
+            }
+            else
+            {
+                using (StreamReader str = new StreamReader(@"E:\isd\Game15\SaveGame.txt", System.Text.Encoding.Default))
+                {
+                    N = new int[size * size+1];
+                    string line;
+                    int i = 0;
+                    while ((line = str.ReadLine())!=null)
+                    {
+                        N[i] = Convert.ToInt32(line);
+                        i++;
+                    }
+                    rewrite_m();
+                    refresh();
+                }
+            }
+        }
+
+        public int loadsize(){
+            int s;
+            using (StreamReader str = new StreamReader(@"E:\isd\Game15\SaveGame.txt", System.Text.Encoding.Default))
+            {
+                s = Convert.ToInt32(str.ReadLine());
+            }
+            return s;
+        }
+
+        private void rewrite_m()
+        {
+            int k = 1;
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    game.m[j, i] = N[k];
+                    k++;
+                }
+            }
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    if (game.m[j, i] == 0)
+                    {
+                        game.space_x = j;
+                        game.space_y = i;
+                    }
+                }
+            }
+        }
+
+        private Button but(int position) 
         {
             for (int i = 0; i < size; i++)
             {
@@ -165,7 +243,9 @@ namespace Game15
                     count_img++;
                     big_img[count_img] = pic.img;
                     a++;
-                    start_game();
+                    //start_game();
+                    refresh();
+                    c = count_img;
                     return true;
                 }
                 catch

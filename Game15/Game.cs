@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using System.Windows.Forms;
 
 namespace Game15
 {
     class Game
     {
-        int size, space_x, space_y;
+        int size;
+        public int space_x, space_y;
         public int[,] m;
         static Random rand = new Random();
 
@@ -157,3 +158,4 @@ namespace Game15
 
     }
 }
+ 

@@ -46,40 +46,6 @@ namespace Game15
             con.start_game();
         }
 
-        private void toolStripMenuItem3_Click(object sender, EventArgs e)
-        {
-            int size = 4; 
-            con.delete_button();
-            con = new Control(size);
-            generatoin_buttom(size);
-            pictureBox1.Size = new Size(size * 65, size * 65);
-            pictureBox1.Image = con.start_pic();
-
-        }
-
-        private void toolStripMenuItem4_Click(object sender, EventArgs e)
-        {
-            
-            int size = 6;
-            con.delete_button();
-            con = new Control(size);
-            generatoin_buttom(size);
-            pictureBox1.Size = new Size(size * 65, size * 65);
-            pictureBox1.Image = con.start_pic();
-
-        }
-
-        private void toolStripMenuItem5_Click(object sender, EventArgs e)
-        {
-            int size = 8;
-            con.delete_button();
-            con = new Control(size);
-            generatoin_buttom(size);
-            pictureBox1.Size = new Size(size * 65, size * 65);
-            pictureBox1.Image = con.start_pic();
-
-        }
-
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
             FormHelp newForm = new FormHelp();
@@ -90,7 +56,7 @@ namespace Game15
         {
             if (con.Add_pictire() == true)
             {
-                pictureBox1.Image = Control.big_img[Control.count_img];
+                pictureBox1.Image = Control.big_img[Control.c];
                 buttonRight.Enabled = true;
                 buttonLeft.Enabled = true;
             }
@@ -100,13 +66,13 @@ namespace Game15
         {
             if (con.Left_Click() == false)
             {
-                pictureBox1.Image = Control.big_img[Control.count_img];
+                pictureBox1.Image = Control.big_img[Control.c];
                 buttonLeft.Enabled = false;
             }
             else
             {
                 buttonRight.Enabled = true;
-                pictureBox1.Image = Control.big_img[Control.count_img];
+                pictureBox1.Image = Control.big_img[Control.c];
             }
         }
 
@@ -120,9 +86,60 @@ namespace Game15
             else
             {
                 buttonLeft.Enabled = true;
-                pictureBox1.Image = Control.big_img[Control.count_img];
+                pictureBox1.Image = Control.big_img[Control.c];
             }
         }
+
+        private void savegame_Click(object sender, EventArgs e)
+        {
+            con.Save();
+        }
+
+        private void loadSavedGame_Click(object sender, EventArgs e)
+        {
+            int size = con.loadsize();
+            con.delete_button();
+            con = new Control(size);
+            generatoin_buttom(size);
+            pictureBox1.Size = new Size(size * 65, size * 65);
+            pictureBox1.Image = con.start_pic();
+            con.loadSavedGame();
+        }
+
+        private void level1_Click_1(object sender, EventArgs e)
+        {
+            int size = 4;
+            con.delete_button();
+            con = new Control(size);
+            generatoin_buttom(size);
+            pictureBox1.Size = new Size(size * 65, size * 65);
+            pictureBox1.Image = con.start_pic();
+            
+        }
+
+        private void level2_Click_1(object sender, EventArgs e)
+        {
+            int size = 6;
+            con.delete_button();
+            con = new Control(size);
+            generatoin_buttom(size);
+            pictureBox1.Size = new Size(size * 65, size * 65);
+            pictureBox1.Image = con.start_pic();
+            
+        }
+
+        private void level3_Click_1(object sender, EventArgs e)
+        {
+            int size = 8;
+            con.delete_button();
+            con = new Control(size);
+            generatoin_buttom(size);
+            pictureBox1.Size = new Size(size * 65, size * 65);
+            pictureBox1.Image = con.start_pic();
+            
+        }
+
+        
 
        
 
